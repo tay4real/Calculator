@@ -133,5 +133,88 @@
         </tr>
       </table>
     </div>
+    <script>
+      window.addEventListener("DOMContentLoaded", function () {
+        // MEMORY OF OUR APPLICATION
+        let operation = "";
+        let previousResult = 0; // First operand
+        const numericButtonPressed = function (event) {
+          const numberPressed = event.target.value;
+          const result = document.getElementById("result");
+
+          if (result.value === "0") {
+            result.value = numberPressed;
+          } else {
+            result.value += numberPressed;
+          }
+        };
+
+        const sum = function (x, y) {
+          return x + y;
+        };
+        const div = function (x, y) {
+          return x / y;
+        };
+        const diff = (x, y) => {
+          return x / y;
+        };
+        const mul = (x, y) => {
+          return x * y;
+        };
+
+        const functionButtonPressed = function (event) {
+          const keyPressed = event.target.value;
+
+          switch (keyPressed) {
+            case "=":
+              switch (operation) {
+                case "+":
+                  result.value = sum(previousResult, parseFloat(result.value));
+                  break;
+                case "-":
+                  result.value = diff(previousResult, parseFloat(result.value));
+                  break;
+                case "*":
+                  result.value = mul(previousResult, parseFloat(result.value));
+                  break;
+                case "/":
+                  result.value = div(previousResult, parseFloat(result.value));
+                  break;
+                default:
+                  console.log("Default case");
+              }
+              break;
+            case "C":
+              result.value = 0;
+              previousResult = 0;
+              operation = "";
+
+              console.log("previousResult", previousResult);
+              console.log("operation", operation);
+              break;
+            default:
+              previousResult = parseFloat(result.value);
+              console.log("previousResult", previousResult);
+              operation = keyPressed;
+              console.log("operation", operation);
+
+              result.value = 0;
+          }
+        };
+
+        const numericButtons = document.getElementsByClassName("numericButton");
+        const functionButtons = document.getElementsByClassName(
+          "functionButton"
+        );
+
+        for (let button of numericButtons) {
+          button.addEventListener("click", numericButtonPressed);
+        }
+
+        for (let button of functionButtons) {
+          button.addEventListener("click", functionButtonPressed);
+        }
+      });
+    </script>
   </body>
 </html>
