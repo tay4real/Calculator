@@ -1,1 +1,2 @@
-# m1-d8-dom-calculator
+# M1-D8-DOM-CALCULATOR
+# STRIVE SCHOOL CLASS DEMO
